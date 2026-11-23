@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+<h1>{{ course.title }}</h1>
+<p>{{ course.description }}</p>
+
+<ul>
+    <li>دسته‌بندی: {{ course.category.name }}</li>
+    <li>مدرس: {{ course.instructor.username }}</li>
+    <li>زمان: {{ course.start_date }} تا {{ course.end_date }}</li>
+    <li>هزینه: {{ course.price }}</li>
+    <li>ظرفیت: {{ course.capacity }}</li>
+</ul>
+
+<h3>جلسات</h3>
+<ul>
+    {% for s in course.sessions.all %}
+        <li>{{ s.title }} - {{ s.date }} ({{ s.start_time }} تا {{ s.end_time }})</li>
+    {% empty %}
+        <li>هنوز جلسه‌ای تعریف نشده است.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'home' %}">بازگشت به لیست</a>
+{% endblock %}

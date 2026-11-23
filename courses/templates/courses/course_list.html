@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}دوره‌ها{% endblock %}
+{% block content %}
+<h1>دوره‌های آموزشی</h1>
+
+<form method="get">
+    {{ filter.form.q }}
+    {{ filter.form.category }}
+    <button type="submit">جستجو</button>
+</form>
+
+<ul>
+    {% for course in courses %}
+        <li>
+            <a href="{% url 'courses:detail' course.pk %}">{{ course.title }}</a>
+            - {{ course.category.name }}
+            - مدرس: {{ course.instructor.username }}
+        </li>
+    {% empty %}
+        <li>دوره‌ای پیدا نشد.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
