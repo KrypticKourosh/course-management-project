@@ -12,6 +12,9 @@
             {% if user.role == 'student' %}
                 <a href="{% url 'enrollments:my-courses' %}">دوره‌های من</a>
             {% endif %}
+            {% if user.role == 'instructor' %}
+                <a href="{% url 'courses:teaching' %}">دوره‌های تدریس</a>
+            {% endif %}
             <form method="post" action="{% url 'accounts:logout' %}" style="display:inline">
                 {% csrf_token %}
                 <button type="submit">خروج</button>

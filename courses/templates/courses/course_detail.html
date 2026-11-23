@@ -31,5 +31,13 @@
     <p><a href="{% url 'accounts:login' %}?next={{ request.path }}">برای ثبت‌نام وارد شوید</a></p>
 {% endif %}
 
+{% if user == course.instructor %}
+    <p>
+        <a href="{% url 'courses:edit' course.pk %}">ویرایش دوره</a> |
+        <a href="{% url 'courses:session-add' course.pk %}">افزودن جلسه</a> |
+        <a href="{% url 'enrollments:students' course.pk %}">دانشجویان</a>
+    </p>
+{% endif %}
+
 <a href="{% url 'home' %}">بازگشت به لیست</a>
 {% endblock %}

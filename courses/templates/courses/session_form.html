@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}افزودن جلسه{% endblock %}
+{% block content %}
+<h2>افزودن جلسه به دوره «{{ course.title }}»</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">ذخیره</button>
+</form>
+{% endblock %}

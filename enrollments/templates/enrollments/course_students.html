@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}دانشجویان دوره{% endblock %}
+{% block content %}
+<h1>دانشجویان دوره: {{ course.title }}</h1>
+
+<table border="1" cellpadding="6">
+    <tr><th>دانشجو</th><th>نمره</th><th>ارزیابی</th><th></th></tr>
+    {% for e in enrollments %}
+        <tr>
+            <td>{{ e.student.get_full_name|default:e.student.username }}</td>
+            <td>{{ e.grade|default_if_none:"-" }}</td>
+            <td>{{ e.evaluation|default:"-" }}</td>
+            <td><a href="{% url 'enrollments:grade' e.pk %}">ثبت نمره</a></td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="4">هنوز دانشجویی ثبت‌نام نکرده است.</td></tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'courses:teaching' %}">بازگشت</a>
+{% endblock %}

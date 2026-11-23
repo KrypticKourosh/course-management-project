@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}دوره‌های تدریس{% endblock %}
+{% block content %}
+<h1>دوره‌های من (مدرس)</h1>
+<a href="{% url 'courses:create' %}">ساخت دوره جدید</a>
+
+<ul>
+    {% for course in courses %}
+        <li>
+            <a href="{% url 'courses:detail' course.pk %}">{{ course.title }}</a>
+            | <a href="{% url 'courses:edit' course.pk %}">ویرایش</a>
+            | <a href="{% url 'courses:session-add' course.pk %}">افزودن جلسه</a>
+            | <a href="{% url 'enrollments:students' course.pk %}">دانشجویان</a>
+        </li>
+    {% empty %}
+        <li>هنوز دوره‌ای نساخته‌اید.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
