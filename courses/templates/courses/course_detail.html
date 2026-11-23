@@ -20,6 +20,16 @@
         <li>هنوز جلسه‌ای تعریف نشده است.</li>
     {% endfor %}
 </ul>
+{% if user.is_authenticated %}
+    {% if user.role == 'student' %}
+        <form method="post" action="{% url 'enrollments:enroll' course.pk %}">
+            {% csrf_token %}
+            <button type="submit">ثبت‌نام در دوره</button>
+        </form>
+    {% endif %}
+{% else %}
+    <p><a href="{% url 'accounts:login' %}?next={{ request.path }}">برای ثبت‌نام وارد شوید</a></p>
+{% endif %}
 
 <a href="{% url 'home' %}">بازگشت به لیست</a>
 {% endblock %}

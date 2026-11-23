@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}دوره‌های من{% endblock %}
+{% block content %}
+<h1>دوره‌های من</h1>
+
+<ul>
+    {% for e in enrollments %}
+        <li>
+            <a href="{% url 'courses:detail' e.course.pk %}">{{ e.course.title }}</a>
+            - مدرس: {{ e.course.instructor.username }}
+            - نمره: {{ e.grade|default:"ثبت نشده" }}
+        </li>
+    {% empty %}
+        <li>هنوز در هیچ دوره‌ای ثبت‌نام نکرده‌اید.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'home' %}">بازگشت به لیست</a>
+{% endblock %}
